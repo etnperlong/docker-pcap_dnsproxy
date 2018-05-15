@@ -2,7 +2,7 @@ FROM debian:stretch-slim
 
 LABEL maintainer="LisonFan <lisonfan1996@gmail.com>"
 
-ENV PCAP_DNSPROXY_VERSION 0.4.9.6
+ENV PCAP_DNSPROXY_VERSION 0.4.9.7
 ENV LIBSODIUM_VERSION 1.0.16
 ENV TZ 'Asia/Shanghai'
 
