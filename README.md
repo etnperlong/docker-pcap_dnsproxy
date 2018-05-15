@@ -10,7 +10,7 @@ docker run -itd \
 -p 53:53/udp \
 --restart always \
 --name Pcap_DNSProxy \
-lisonfan/pcap_dnsproxy:0.4.9.7
+lisonfan/pcap_dnsproxy
 ```
 
 ## 自定义配置文件
@@ -21,5 +21,5 @@ docker run -itd \
 -v /you/path/xxx.xxx:/pcap_dnsproxy/xxx.xxx \
 --restart always \
 --name Pcap_DNSProxy \
-lisonfan/pcap_dnsproxy:0.4.9.7
+lisonfan/pcap_dnsproxy
 ```
