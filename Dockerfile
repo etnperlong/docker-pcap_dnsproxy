@@ -5,7 +5,7 @@ LABEL maintainer="LisonFan <lisonfan1996@gmail.com>"
 ARG TZ='Asia/Shanghai'
 
 ENV TZ $TZ
-ENV PCAP_DNSPROXY_VERSION 0.4.9.8
+ENV PCAP_DNSPROXY_VERSION 0.4.9.9
 
 RUN apk upgrade --update \
     && apk add bash tzdata \
