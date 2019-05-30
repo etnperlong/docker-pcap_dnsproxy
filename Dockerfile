@@ -1,6 +1,6 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
-LABEL maintainer="LisonFan <lisonfan1996@gmail.com>"
+LABEL maintainer="Evans Mike <etnperlong@gmail.com>"
 
 ARG TZ='Asia/Shanghai'
 
@@ -34,10 +34,13 @@ RUN apk upgrade --update \
     && cd Pcap_DNSProxy/Source/Auxiliary/Scripts \
     && chmod 755 CMake_Build.sh \
     && ./CMake_Build.sh \
-    && mv /tmp/Pcap_DNSProxy/Source/Release /pcap_dnsproxy \
+    && cp /tmp/Pcap_DNSProxy/Source/Release/Pcap_DNSProxy /usr/bin/Pcap_DNSProxy \
+	&& mkdir -p /etc/Pcap_DNSProxy \
+	&& cp /tmp/Pcap_DNSProxy/Source/Release/*.txt /etc/Pcap_DNSProxy \
+	&& cp /tmp/Pcap_DNSProxy/Source/Release/*.conf /etc/Pcap_DNSProxy \
     && rm -rf /tmp/Pcap_DNSProxy ) \
     && runDeps="$( \
-        scanelf --needed --nobanner /pcap_dnsproxy/* \
+        scanelf --needed --nobanner /usr/bin/Pcap_DNSProxy \
             | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
             | xargs -r apk info --installed \
             | sort -u \
@@ -46,6 +49,4 @@ RUN apk upgrade --update \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/*
 
-WORKDIR /pcap_dnsproxy
-
-ENTRYPOINT ["/pcap_dnsproxy/Pcap_DNSProxy", "--disable-daemon"]
+ENTRYPOINT ["/usr/bin/Pcap_DNSProxy", "--config-path /etc/Pcap_DNSProxy", "--log-file stdout", "--disable-daemon"]
